@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+  <script>
+    // https://courses.wesbos.com/account/access/5922a132f552890dd32a4620/view/194130650
+    window.addEventListener('keydown', playSound) // 監聽鍵盤事件
+
+    // 播放聲音 ＆ 添加一個class樣式...
+    function playSound (event) {
+      const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`) // 抓出聲音檔
+      const key = document.querySelector(`.key[data-key="${event.keyCode}"]`) // 抓出畫面上的鍵盤
+      if (!audio) return // 如果event傳進來，不等於同個keyCode的聲音檔就不理他
+      audio.currentTime = 0  // 將聲音回到一開始
+      audio.play() // 播放聲音
+      key.classList.add('playing') // 把畫面上的鍵盤多加一個Class
+    }
+
+    // 我們可以知道CSS轉場結束了沒...
+    const keys = document.querySelectorAll('.key') // 抓出所有的鍵盤div
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition)) // 監聽這些div的轉場「已完成」的事件，結束後就可以執行removeTransition
+    
+    // 移除Class...
+    function removeTransition (event) {
+      if(event.propertyName !== 'transform') return // 我們只需要知道'transform'這個屬性就好，其他不需要
+      this.classList.remove('playing') // 移除class
+    }
+  </script> 
+
+</body>
+
+</html>
