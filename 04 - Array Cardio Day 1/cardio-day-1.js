@@ -145,8 +145,8 @@ console.log(viecleCounts) // ​​​​​{ car: 5, truck: 3, bike: 2, walk: 2
 
 // Howard會想寫成... 
 const viecleCounts2 = data.reduce(function (sum, viecle) {
-  if (!sum[viecle]) {
-    sum[viecle] = 0
+  if (sum[viecle] === undefined) {
+    sum[viecle] = 1
   } else {
     sum[viecle]++;
   }
