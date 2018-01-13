@@ -130,11 +130,11 @@ console.log(peopleByLastName)
 
 // Array.prototype.reduce()
 // 8. 列出每個物件的數量
-// 正確的寫法...
+// 課程的寫法...
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
 
 const viecleCounts = data.reduce(function (sum, viecle) {
-  if (!sum[viecle]) {
+  if (!sum[viecle]) { // [注意！] !0 也會是是false，所以課程的寫法沒有把++放在else裡面
     sum[viecle] = 0
   }
     sum[viecle]++;
@@ -143,7 +143,7 @@ const viecleCounts = data.reduce(function (sum, viecle) {
 },{})
 console.log(viecleCounts) // ​​​​​{ car: 5, truck: 3, bike: 2, walk: 2, van: 2, pogostick: 1 }​​​​​
 
-// Howard會想寫成... 
+// 不用!sum[viecle]的判斷方式，用undefined會比較精準，或是用typeof做進一步判斷
 const viecleCounts2 = data.reduce(function (sum, viecle) {
   if (sum[viecle] === undefined) {
     sum[viecle] = 1
@@ -154,5 +154,4 @@ const viecleCounts2 = data.reduce(function (sum, viecle) {
   
 },{})
 console.log(viecleCounts2) 
-// 這樣會變成 ​​​​​{ car: 0, truck: 0, bike: 0, walk: 0, van: 0, pogostick: 0 }​​​​​
-// why????
+
