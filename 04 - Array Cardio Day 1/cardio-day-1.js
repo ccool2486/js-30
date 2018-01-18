@@ -3,6 +3,10 @@
 // ## Array Cardio Day 1
 
 // Some data we can work with
+({ // Babel for Quokka setup
+  babel: true
+})
+import inventors2 from './test-module'
 
 const inventors = [
 	{ first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
@@ -18,6 +22,7 @@ const inventors = [
 	{ first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
 	{ first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
 ]
+
 
 const people = [
 	'Beck, Glenn',
@@ -122,9 +127,9 @@ console.log(inventorsWithAges);
 ('Beck, Glenn').split(', ') /*?*/
 
 const peopleByLastName = people.sort((a,b) => {
-  const [aLast, aFirst] = a.split(', ')
-  const [bLast, bFirst] = b.split(', ')
-  aLast > bLast ? 1 : -1
+	const [aLast, aFirst] = a.split(', ')
+	const [bLast, bFirst] = b.split(', ')
+	aLast > bLast ? 1 : -1
 })
 console.log(peopleByLastName)
 
@@ -134,23 +139,23 @@ console.log(peopleByLastName)
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
 
 const viecleCounts = data.reduce(function (sum, viecle) {
-  if (!sum[viecle]) { // [注意！] !0 也會是是false，所以課程的寫法沒有把++放在else裡面
-    sum[viecle] = 0
-  }
-    sum[viecle]++;
-    return sum;
+	if (!sum[viecle]) { // [注意！] !0 也會是是false，所以課程的寫法沒有把++放在else裡面
+		sum[viecle] = 0
+	}
+	sum[viecle]++;
+	return sum;
   
 },{})
 console.log(viecleCounts) // ​​​​​{ car: 5, truck: 3, bike: 2, walk: 2, van: 2, pogostick: 1 }​​​​​
 
 // 不用!sum[viecle]的判斷方式，用undefined會比較精準，或是用typeof做進一步判斷
 const viecleCounts2 = data.reduce(function (sum, viecle) {
-  if (sum[viecle] === undefined) {
-    sum[viecle] = 1
-  } else {
-    sum[viecle]++;
-  }
-  return sum;
+	if (sum[viecle] === undefined) {
+		sum[viecle] = 1
+	} else {
+		sum[viecle]++;
+	}
+	return sum;
   
 },{})
 console.log(viecleCounts2) 
